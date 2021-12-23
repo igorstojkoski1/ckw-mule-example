@@ -1,0 +1,2 @@
+# ckw-example
+just an example project for another mule-app and -api. check if we would like to create an archetype if neccessary. if not, this project can be used as an archetype and the files can be copied into it's new project. ie. s-mysystemapi, p-myprocessapi, e-myexpreienceapi
