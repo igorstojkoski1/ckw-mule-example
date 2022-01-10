@@ -4,14 +4,13 @@
 
 	<parent>
 		<groupId>ch.ckw</groupId>
-		<artifactId>mule-parent-pom</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<artifactId>ckw-mule-parent-pom</artifactId>
+		<version>1.0.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
-
 	<groupId>ch.ckw</groupId>
-	<artifactId>ckw-example</artifactId>
+	<artifactId>ckw-mule-example</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>mule-application</packaging>
 
@@ -22,7 +21,7 @@
 	</properties>
 
 	<dependencies>
-        <!-- default dependencies used in each an every mule-app and -api, specific dependendiese has to be added within the child-POM. but keep in mind, all the dependency-versions is managed within this parent pom. this is neccessary to keep all mule app aligned with the muleplattform and mule-runtime. -->
+        <!-- Only App/API specific versions may be maintained directly in htis projects POM. If, for example, a dependency is used for a large number of Apps/APIs, the version must be maintained in the parent POM.  -->
         <dependency>
             <groupId>org.mule.connectors</groupId>
             <artifactId>mule-http-connector</artifactId>
@@ -44,6 +43,10 @@
                 <groupId>org.mule.tools.maven</groupId>
                 <artifactId>mule-maven-plugin</artifactId>
                 <extensions>true</extensions>
+            </plugin>
+            <plugin>
+                <groupId>com.mulesoft.munit.tools</groupId>
+                <artifactId>munit-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
