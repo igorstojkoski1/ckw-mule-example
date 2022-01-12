@@ -5,7 +5,14 @@
     xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
-    <configuration-properties doc:name="Configuration properties" file="mule-artifact.properties" />
+   
+    <configuration-properties doc:name="Configuration properties" file="${env}.properties" />   
+
+    <!-- check if this value can be injected during deployment or during runtime and this is only the fallback value -->
+    <!-- check the SDA for any more information about the Environments -->
+	<global-property doc:name="Global Property" name="env" value="dev" />
+
+   
     <http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="d6132ed6-b549-4a5a-ab30-b0006362476b">
         <http:listener-connection host="0.0.0.0" port="${http.port}" />
     </http:listener-config>
