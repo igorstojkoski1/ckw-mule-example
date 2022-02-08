@@ -1,6 +1,6 @@
 # This workflow will build a MuleSoft project and deploy to CloudHub
 
-name: Build to 
+name: Build
 on:
   push:
     branches: [ feautre-*]
