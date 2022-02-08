@@ -1,0 +1,40 @@
+# This workflow will build a MuleSoft project and deploy to CloudHub
+
+name: Build to 
+on:
+  push:
+    branches: [ feautre-*]
+    
+  workflow_dispatch:
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-mvn-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-mvn-
+      - name: Inject slug/short variables
+        uses: rlespinasse/github-slug-action@v2.x
+
+      - name: Maven Settings
+        env:
+          MAVEN_SETTINGS_XML: ${{ secrets.MAVEN_MULESOFT_SETTINGS_XML }}
+        run:
+          echo $MAVEN_SETTINGS_XML | base64 -d > ${{ github.workspace }}/settings.xml
+
+      - name: Update pom.xml Version
+        run: mvn versions:set -DnewVersion=${{env.muleAppVersion}}
+
+      - name: Build with Maven
+        run:
+          mvn -B package -s ${{ github.workspace }}/settings.xml
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: ${{env.artifactName}}
+          path: ${{ github.workspace }}/target/*mule-application*.jar
