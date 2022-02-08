@@ -1,9 +1,12 @@
 # This workflow will build a MuleSoft project and deploy to CloudHub
 
-name: Build and Deploy to Sandbox
+name: Build on Featured-* branch
 on:
   push:
-    branches: [ featured-* ]
+    branches: [ feautre, develop, main ]
+  pull_request: 
+      types: [ assigned, opened, synchronize, reopened ]
+      branches: [ develop, main ]
     
   workflow_dispatch:
     
